@@ -90,10 +90,6 @@ public:
 };
 
 class PluginRegistratorCmd : public SubCmd {
-private:
-
-
-
 public:
     PluginRegistratorCmd() {
         add_subcommand("plugin", std::make_shared<PluginCmd>());
