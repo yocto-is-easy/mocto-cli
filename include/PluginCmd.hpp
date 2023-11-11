@@ -88,16 +88,3 @@ public:
     }
 
 };
-
-class PluginRegistratorCmd : public SubCmd {
-public:
-    PluginRegistratorCmd() {
-        add_subcommand("plugin", std::make_shared<PluginCmd>());
-    }
-
-    void cmd() override {}
-
-    std::string get_cmd_description() override {
-        return "PluginRegistrator sub-command - registers plugins and their functions";
-    }
-};

@@ -16,6 +16,7 @@ namespace po = boost::program_options;
 class SubCmd {
     std::map<std::string, std::shared_ptr<SubCmd>> subcommands;
     po::options_description opt_desc;
+    std::vector<po::option> m_options;
 
 public:
     SubCmd() {
@@ -71,10 +72,16 @@ public:
         return opt_desc;
     }
 
+    virtual std::vector<po::option> get_options() {
+        return m_options;
+    }
+
     virtual void cmd_proceeder(int argc, char** argv) {
         po::variables_map vm;
         try{
-            po::store(po::parse_command_line(argc, argv, opt_desc), vm);
+            po::parsed_options parsed = po::parse_command_line(argc, argv, opt_desc);
+            m_options = parsed.options;
+            po::store(parsed, vm);
             po::notify(vm);
         } catch(std::exception& e) {
             std::cout << "Error: " << e.what() << std::endl;

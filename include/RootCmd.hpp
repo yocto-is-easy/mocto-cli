@@ -2,14 +2,16 @@
 
 #include "SubCmd.hpp"
 
-#include "PluginRegistratorCmd.hpp"
+#include "PluginCmd.hpp"
+#include "FunctionCmd.hpp"
 
 class RootCmd : public SubCmd {
 private:
 
 public:
     RootCmd() {
-        add_subcommand("pr", std::make_shared<PluginRegistratorCmd>());
+        add_subcommand("plugin", std::make_shared<PluginCmd>());
+        add_subcommand("function", std::make_shared<FunctionCmd>());
     }
 
     void cmd() override {}
